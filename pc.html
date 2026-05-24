@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>VR7 - هاكات PC</title>
+   <link rel="stylesheet" href="sty-pc.css" type="text/css" media="all" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <style>
+      /* Video Modal Styles */
+      .video-modal {
+         display: none;
+         position: fixed;
+         z-index: 1000;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.95);
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+      }
+      
+      .video-modal.active {
+         display: flex;
+      }
+      
+      .video-modal-content {
+         position: relative;
+         background-color: #1a1a1a;
+         padding: 20px;
+         border-radius: 10px;
+         max-width: 90%;
+         max-height: 90vh;
+         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+         overflow: auto;
+      }
+      
+      .video-modal-close {
+         position: absolute;
+         right: 15px;
+         top: 10px;
+         font-size: 28px;
+         font-weight: bold;
+         color: #fff;
+         background: none;
+         border: none;
+         cursor: pointer;
+         z-index: 1001;
+         transition: color 0.3s;
+      }
+      
+      .video-modal-close:hover {
+         color: #ff0000;
+      }
+      
+      .video-modal-title {
+         color: #fff;
+         margin-bottom: 15px;
+         margin-top: 5px;
+         text-align: center;
+         font-size: 20px;
+      }
+      
+      .video-player {
+         width: 100%;
+         max-width: 800px;
+         height: auto;
+         min-height: 450px;
+         border-radius: 8px;
+         background-color: #000;
+      }
+
+      .video-error-message {
+         color: #fff;
+         text-align: center;
+         padding: 20px;
+         background-color: #2a2a2a;
+         border-radius: 8px;
+         margin-top: 15px;
+         display: none;
+      }
+
+      .video-error-message.show {
+         display: block;
+      }
+
+      .video-fallback-button {
+         background-color: #00bfff;
+         color: white;
+         border: none;
+         padding: 10px 20px;
+         border-radius: 5px;
+         cursor: pointer;
+         margin-top: 10px;
+         font-size: 16px;
+         transition: background-color 0.3s;
+      }
+
+      .video-fallback-button:hover {
+         background-color: #0099cc;
+      }
+      
+      @media (max-width: 768px) {
+         .video-modal-content {
+            max-width: 95%;
+            padding: 10px;
+         }
+         
+         .video-player {
+            max-width: 100%;
+            min-height: 300px;
+         }
+      }
+   </style>
+</head>
+<body>
+   <div class="particles" id="particles"></div>
+
+   <nav class="navbar" id="navbar">
+       <div class="nav-container">
+           <div class="nav-logo">
+               <i class="fas fa-code"></i>
+               <span>VR7</span>
+           </div>
+           <div class="nav-links">
+               <a href="index.html" class="nav-link"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+               <a href="macos.html" class="nav-link"><i class="fa-brands fa-apple"></i> <span>هاكات macOS</span></a>
+               <a href="android.html" class="nav-link"><i class="fab fa-android"></i> <span>هاكات Android</span></a>
+           </div>
+       </div>
+   </nav>
+
+   <div class="menu-toggle" id="menuToggle">
+       <span></span>
+       <span></span>
+       <span></span>
+   </div>
+
+   <div class="mobile-menu" id="mobileMenu">
+       <div class="mobile-menu-header">
+           <div class="mobile-logo">
+               <i class="fas fa-code"></i>
+               <span>VR7 TEAM</span>
+           </div>
+       </div>
+       <ul class="mobile-menu-items">
+           <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+           <li><a href="macos.html"><i class="fa-brands fa-apple"></i> هاكات macOS</a></li>
+           <li><a href="android.html"><i class="fab fa-android"></i> هاكات Android</a></li>
+       </ul>
+   </div>
+
+   <div class="menu-overlay" id="menuOverlay"></div>
+
+   <div class="content">
+       <h1 id="pc-title" class="pc-title animated-glow">تطبيقات PC</h1>
+       
+       <div class="section-text fade-in-section">
+           <p>أفضل هاكات PC آمنة وبدون ضرر على جهازك</p>
+       </div>
+
+       <div class="section-text fade-in-section">
+           <h3>عزيزي المستخدم</h3>
+           <p>عندما تواجه أي مشكلة، لا تتردد في فتح تذكرة دعم في سيرفر ديسكورد VR7 وسنقوم بمساعدتك في أقرب وقت.</p>
+       </div>
+       
+       <div class="category-tabs">
+           <div class="category-tab active" data-category="PC">PC</div>
+       </div>
+       
+       <div class="app-grid">
+           <!-- Solara -->
+           <div class="app-card" data-category="PC" data-exploit-name="Solara">
+               <div class="app-header">
+                   <img src="Solara.png" alt="Solara" class="app-image" width="300" height="200">
+                   <div class="app-overlay"></div>
+                   <div class="app-badge">جاري التحميل...</div>
+               </div>
+               <div class="app-body">
+                   <h3 class="app-title">Solara <span class="version-tag">جاري التحميل...</span></h3>
+                   <div class="rating">
+                       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                   </div>
+                   <p class="app-description">هاك متطور وسريع</p>
+                   <div class="app-features">
+                       <div class="app-feature"><span>أقدم نسخة هاك</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>واجهة سلسة وسريعة</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>تشغيل جميع السكربتات</span><i class="fas fa-check"></i></div>
+                   </div>
+                   <div class="app-buttons">
+                       <a href="https://getsolara.dev/download/static/files/BootstrapperNew.exe" class="app-button download-btn" target="_blank">تثبيت</a>
+                       <a href="https://discord.gg/vr7" class="app-button info-btn">ديسكورد</a>
+                       <button class="app-button tutorial-btn" onclick="playVideo('T2Turgu(1).mov', 'Solara')"><i class="fas fa-play-circle"></i> شرح</button>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Xeno -->
+           <div class="app-card" data-category="PC" data-exploit-name="Xeno">
+               <div class="app-header">
+                   <img src="Xeno.png" alt="Xeno" class="app-image" width="300" height="200">
+                   <div class="app-overlay"></div>
+                   <div class="app-badge">جاري التحميل...</div>
+               </div>
+               <div class="app-body">
+                   <h3 class="app-title">Xeno <span class="version-tag">جاري التحميل...</span></h3>
+                   <div class="rating">
+                       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                   </div>
+                   <p class="app-description">هاك متقدم الصنع</p>
+                   <div class="app-features">
+                       <div class="app-feature"><span>تشغيل كافة السكربتات</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>يدعم Lua و Luau</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>واجهة متحركة وجميلة</span><i class="fas fa-check"></i></div>
+                   </div>
+                   <div class="app-buttons">
+                       <a href="https://www.mediafire.com/file/ejt7d8fwv80850r/Xeno-v1.3.40.exe/file" class="app-button download-btn" target="_blank">تثبيت</a>
+                       <a href="https://discord.gg/vr7" class="app-button info-btn">ديسكورد</a>
+                   </div>
+               </div>
+           </div>
+
+           <!-- Velocity -->
+           <div class="app-card" data-category="PC" data-exploit-name="Velocity">
+               <div class="app-header">
+                   <img src="Velocity.png" alt="Velocity" class="app-image" width="300" height="200">
+                   <div class="app-overlay"></div>
+                   <div class="app-badge">جاري التحميل...</div>
+               </div>
+               <div class="app-body">
+                   <h3 class="app-title">Velocity <span class="version-tag">جاري التحميل...</span></h3>
+                   <div class="rating">
+                       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                   </div>
+                   <p class="app-description">نسخة معدلة من Roblox للكمبيوتر</p>
+                   <div class="app-features">
+                       <div class="app-feature"><span>لتشغيل هاكات PC</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>روبلوكس بشكل معدل</span><i class="fas fa-check"></i></div>
+                       <div class="app-feature"><span>نسخة بدون مشاكل</span><i class="fas fa-check"></i></div>
+                   </div>
+                   <div class="app-buttons">
+                       <a href="https://gofile.io/d/qpOZtq" class="app-button download-btn" target="_blank">تثبيت</a>
+                       <a href="https://discord.gg/vr7" class="app-button info-btn">ديسكورد</a>
+                       <button class="app-button tutorial-btn" onclick="playVideo('0523(1).mp4', 'Velocity')"><i class="fas fa-play-circle"></i> شرح</button>
+                   </div>
+               </div>
+           </div>
+       </div>
+
+       <div class="installation-guide">
+           <h3 class="guide-title">دليل التثبيت</h3>
+           <div class="guide-steps">
+               <div class="guide-step">
+                   <h4>إطفاء الحماية</h4>
+                   <p>يرجى إيقاف حماية الويندوز (Windows Defender) مؤقتاً.</p>
+               </div>
+               <div class="guide-step">
+                   <h4>تحميل الهاك</h4>
+                   <p>اضغط على زر "تثبيت" للهاك المطلوب وانتظر التحميل.</p>
+               </div>
+               <div class="guide-step">
+                   <h4>تشغيل الملف</h4>
+                   <p>قم بفك ضغط الملف وتشغيل البرنامج كمسؤول.</p>
+               </div>
+           </div>
+       </div>
+
+       <div class="social-icons">
+           <a href="https://youtube.com/@_vr7" class="social-icon" target="_blank"><i class="fab fa-youtube"></i></a>
+           <a href="https://discord.gg/vr7" class="social-icon" target="_blank"><i class="fab fa-discord"></i></a>
+       </div>
+   </div>
+
+   <!-- Video Modal -->
+   <div id="videoModal" class="video-modal">
+       <div class="video-modal-content">
+           <button class="video-modal-close" onclick="closeVideo()">&times;</button>
+           <h2 id="videoModalTitle" class="video-modal-title">شرح الفيديو</h2>
+           <video id="videoPlayer" class="video-player" controls style="display: block;">
+               <source id="videoSource" src="">
+               متصفحك لا يدعم تشغيل الفيديو
+           </video>
+           <div id="videoErrorMsg" class="video-error-message">
+               <p>عذراً، لم يتمكن المتصفح من تشغيل الفيديو. يرجى التأكد من وجود ملف الفيديو في نفس مجلد الصفحة.</p>
+               <button class="video-fallback-button" onclick="downloadVideo()">تحميل الفيديو</button>
+           </div>
+       </div>
+   </div>
+
+   <footer>
+       <div class="footer-text">
+           <p>© 2025 TEAM VR7. جميع الحقوق محفوظة.</p>
+           <p>⚠️ نحن لسنا مسؤولين عن أي استخدام خاطئ قد يؤدي لتبنيد حسابك ⚠️</p>
+       </div>
+   </footer>
+
+   <script>
+      let currentVideoPath = '';
+
+      // Video Player Functions
+      function playVideo(videoPath, videoTitle) {
+         const modal = document.getElementById('videoModal');
+         const videoPlayer = document.getElementById('videoPlayer');
+         const videoSource = document.getElementById('videoSource');
+         const videoTitle_el = document.getElementById('videoModalTitle');
+         const errorMsg = document.getElementById('videoErrorMsg');
+         
+         currentVideoPath = videoPath;
+         
+         videoSource.src = videoPath;
+         videoTitle_el.textContent = 'شرح ' + videoTitle;
+         errorMsg.classList.remove('show');
+         
+         modal.classList.add('active');
+         document.body.style.overflow = 'hidden';
+         
+         // Reset video
+         videoPlayer.load();
+         
+         // Try to play with error handling
+         const playPromise = videoPlayer.play();
+         if (playPromise !== undefined) {
+            playPromise.catch(function(error) {
+               console.log('Playback error:', error);
+               errorMsg.classList.add('show');
+            });
+         }
+
+         // Handle errors
+         videoPlayer.onerror = function() {
+            console.error('Video error:', videoPlayer.error);
+            errorMsg.classList.add('show');
+         };
+
+         videoPlayer.onloadedmetadata = function() {
+            console.log('Video loaded successfully');
+            errorMsg.classList.remove('show');
+         };
+      }
+
+      function closeVideo() {
+         const modal = document.getElementById('videoModal');
+         const videoPlayer = document.getElementById('videoPlayer');
+         
+         videoPlayer.pause();
+         modal.classList.remove('active');
+         document.body.style.overflow = '';
+      }
+
+      function downloadVideo() {
+         if (currentVideoPath) {
+            const link = document.createElement('a');
+            link.href = currentVideoPath;
+            link.download = currentVideoPath.split('/').pop();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+         }
+      }
+
+      // Close modal when clicking outside the video
+      window.addEventListener('click', function(event) {
+         const modal = document.getElementById('videoModal');
+         if (event.target === modal) {
+            closeVideo();
+         }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(event) {
+         if (event.key === 'Escape') {
+            closeVideo();
+         }
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+         // Navigation Scroll Effect
+         const navbar = document.querySelector('.navbar');
+         window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+               navbar.classList.add('scrolled');
+            } else {
+               navbar.classList.remove('scrolled');
+            }
+         });
+
+         // Mobile Menu Toggle
+         const menuToggle = document.getElementById('menuToggle');
+         const mobileMenu = document.getElementById('mobileMenu');
+         const menuOverlay = document.getElementById('menuOverlay');
+
+         if (menuToggle && mobileMenu && menuOverlay) {
+            menuToggle.addEventListener('click', () => {
+               menuToggle.classList.toggle('active');
+               mobileMenu.classList.toggle('active');
+               menuOverlay.classList.toggle('active');
+               document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+
+            menuOverlay.addEventListener('click', () => {
+               menuToggle.classList.remove('active');
+               mobileMenu.classList.remove('active');
+               menuOverlay.classList.remove('active');
+               document.body.style.overflow = '';
+            });
+         }
+
+         // Fetch exploit status from WEAO API
+         async function fetchExploitStatus() {
+            const apiUrl = 'https://weao.xyz/api/status/exploits';
+            try {
+               const response = await fetch(apiUrl);
+               if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
+               const exploits = await response.json();
+
+               exploits.forEach(exploit => {
+                  const exploitName = exploit.title;
+                  const appCard = document.querySelector('.app-card[data-exploit-name="' + exploitName + '"]');
+                  if (appCard) {
+                     // Update badge status
+                     const appBadge = appCard.querySelector('.app-badge');
+                     if (appBadge) {
+                        if (exploit.updateStatus === true) {
+                           appBadge.textContent = 'شغال 🟢';
+                           appBadge.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                        } else {
+                           appBadge.textContent = 'يحتاج تحديث 🟡';
+                           appBadge.style.background = 'linear-gradient(45deg, #f1c40f, #f39c12)';
+                        }
+                     }
+                     // Update version tag
+                     const versionTag = appCard.querySelector('.version-tag');
+                     if (versionTag && exploit.version) {
+                        versionTag.textContent = 'v' + exploit.version;
+                     }
+                  }
+               });
+            } catch (error) {
+               console.error('Error fetching exploit status:', error);
+               document.querySelectorAll('.app-badge').forEach(badge => {
+                  if (badge.textContent === 'جاري التحميل...') {
+                     badge.textContent = 'خطأ في التحميل ⚠️';
+                  }
+               });
+            }
+         }
+
+         // Initial fetch
+         fetchExploitStatus();
+         // Refresh status every 5 minutes
+         setInterval(fetchExploitStatus, 300000);
+
+         // Category Filtering
+         const categoryTabs = document.querySelectorAll('.category-tab');
+         const appCards = document.querySelectorAll('.app-card');
+
+         categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+               categoryTabs.forEach(t => t.classList.remove('active'));
+               this.classList.add('active');
+               const category = this.getAttribute('data-category');
+               
+               appCards.forEach(card => {
+                  const cardCategory = card.getAttribute('data-category');
+                  if (category === 'الكل' || cardCategory === category) {
+                     card.style.display = 'block';
+                     setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                     }, 10);
+                  } else {
+                     card.style.opacity = '0';
+                     card.style.transform = 'translateY(20px)';
+                     setTimeout(() => {
+                        card.style.display = 'none';
+                     }, 300);
+                  }
+               });
+            });
+         });
+
+         // Scroll Animations
+         const observerOptions = {
+            threshold: 0.1
+         };
+
+         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                  observer.unobserve(entry.target);
+               }
+            });
+         }, observerOptions);
+
+         document.querySelectorAll('.app-card, .section-text, .pc-title').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+         });
+      });
+   </script>
+</body>
+</html>
